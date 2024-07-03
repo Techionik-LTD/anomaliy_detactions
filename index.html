@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid section1image">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 text flex height">
+                    <div class="flex forms">
+                        <h1 class="size">Upload Video</h1>
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <label for="training_file" style="font-weight:bold;margin-top:5%;">Upload Training Video:</label><br>
+                            <input type="file" name="training_file" id="training_file"><br><br>
+                            <label for="testing_file" style="font-weight:bold;margin-top:5%;">Upload Testing Video:</label><br>
+                            <input type="file" name="testing_file" id="testing_file"><br><br>
+                            <label for="input_epoch" style="margin-top:5%;">Number of Epochs:</label>
+                            <input type="text" name="input_epoch" id="input_epoch"><br><br>
+                            <input type="submit" value="Upload" class="button">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 text  flex height">
+                    <div>
+                        <img src="../static/css/4.png" class="imgwidth">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid section2image">
+        <div class="container">
+            <div class="row" style="padding:5%">
+                <div class="col-md-12 text flex">
+                    <div >
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% endwith %}
+                            {% if anomaly_frame_urls %}
+                                <h2>Anomaly Frames</h2>
+                                <div class="anomaly-frames">
+                                    {% for frame in anomaly_frame_urls %}
+                                        <img src="data:image/png;base64,{{ frame }}" alt="Anomaly Frame" style="width:30%;">
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
